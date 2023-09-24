@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>My Uploads</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700"><link rel="stylesheet" href="{% static 'show_style.css' %}">
+
+</head>
+<body>
+
+<div class="wrapper">
+	<h1>All Uploads</h1>
+	<ol>
+	{% for upload in uploads %}
+		<li>
+			<img src="{{ upload.file.url }}" alt=" {{upload.file}} " />
+		</li>
+	{% endfor %}
+	
+</body>
+</html>

@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Files</title>
+  <link rel="stylesheet" href="{% static 'style1.css' %}">
+</head>
+
+<body>
+  <nav class="navMenu">
+    <a href="">Home</a>
+    <a href="https://dpkgtm12.github.io/dpkgtm12/">About</a>
+    {% if request.session.name %}
+    <a href="/logout">Logout </a>
+    <a style="color:#fddb3a ">{{request.session.name}}</a>
+    {% else %}
+    <a href="/login/">Login</a>
+    <a href="/register/">SignUp</a>
+    {% endif %}
+    <div class="dot"></div>
+  </nav>
+  
+  <div class="container">
+    {% if request.session.username %}
+    <div class="card1">
+      <h3>My Files</h3>
+      <div class="drop_box">
+        <form action="/myuploads" request="get">
+          <button class="btn">My Uploads </button>
+        </form>  
+      </div>
+    </div>
+  {% endif %}
+
+
+
+
+  <!-- <div class="container"> -->
+    <div class="card">
+      <h3>Upload Files</h3>
+      <div class="drop_box">
+        <header>
+          <h4>Select File here</h4>
+        </header>
+        <p>Files Supported: Images , PDF, TEXT, DOC , DOCX</p>
+        <input type="file" hidden accept=".doc,.docx,.pdf,.jpg,.jpeg" id="fileID" style="display:none;">
+        {% if request.session.username %}
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p}}
+          <button class="btn" type="submit">Upload</button>
+        </form>
+        {% else %}
+        <form action="/register">
+          <button class="btn">Choose File</button>
+        </form>
+
+        {% endif %}
+      </div>
+    </div>
+  </div>   
+  
+</body>
+
+</html>
